@@ -24,14 +24,13 @@ public class Util {
         return connection;
     }
 
-    public static Connection closeConnection() {
-        if (connection != null) {
-            try {
+    public static void closeConnection() {
+        try {
+            if (!connection.isClosed() || connection != null) {
                 connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+           e.printStackTrace();
         }
-        return connection;
     }
 }
