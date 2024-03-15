@@ -4,37 +4,40 @@ import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private final UserDao userDao = new UserDaoJDBCImpl();
 
+    @Override
     public void createUsersTable() {
         userDao.createUsersTable();
     }
 
+    @Override
     public void dropUsersTable() {
         userDao.dropUsersTable();
     }
 
+    @Override
     public void saveUser(String name, String lastName, byte age) {
         userDao.saveUser(name, lastName, age);
         System.out.println("User с именем Ч " + name + " добавлен в базу данных");
     }
 
+    @Override
     public void removeUserById(long id) {
         userDao.removeUserById(id);
     }
 
+    @Override
     public List<User> getAllUsers() {
-        try {
-            System.out.println(userDao.getAllUsers());
-            return userDao.getAllUsers();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        List<User> userList = userDao.getAllUsers();
+        System.out.println(userList);
+        return userList;
     }
+
+    @Override
     public void cleanUsersTable() {
         userDao.cleanUsersTable();
     }
